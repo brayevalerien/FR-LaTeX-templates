@@ -1,0 +1,733 @@
+%%%%%%%%%%%%%%%%%%%%%%% Description du fichier %%%%%%%%%%%%%%%%%%%%%%%
+% résumé: Préambule d'un template de prise de notes et de rapports.  %
+% auteur: Valérien BRAYE, basé sur le travail de SeniorMars (github) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Packages de base                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Réduit la taille des marges
+\usepackage[a4paper, margin=2cm]{geometry}
+% Ajoute plusieurs couleurs.
+\usepackage[usenames,dvipsnames,pdftex]{xcolor}
+% Permet de change le style des liens.
+\usepackage{hyperref}
+% Permet d'importer des images et des graphiques.
+\usepackage{graphicx}
+\graphicspath{{./figures}}
+% Permet d'utiliser de nouvelles figures dans des environnements flottants.
+\usepackage{float}
+% Permet de créer plusieurs colonnes.
+\usepackage{multicol}
+% Meilleure syntaxe pour les maths.
+\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb}
+% Permet de barrer du text.
+\usepackage{cancel}
+% Permet de modifier le titre des figures.
+\usepackage{caption}
+% Permet d'importer des pdf directement dans le code LaTeX.
+\usepackage{pdfpages}
+% Permet d'écrire des algorithmes.
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+% Change le symbole CQFD (carré blanc en carré noir).
+\usepackage{tikzsymbols}
+% Traduction en Français des mots générés (date, table des matières...) et caractères français.
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+% Permet l'insertion de texte temporaire
+\usepackage{lipsum}
+% Corrige les problèmes de taille de police
+\usepackage{fix-cm}
+% Permet d'utiliser du texte temporaire
+\usepackage{lipsum}
+
+
+% Modifie le symbole CQFD.
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\def\class{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Paramètres de base                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+%  Symboles  %
+%%%%%%%%%%%%%%
+
+\let\implies\Rightarrow  % ⟹
+\let\impliedby\Leftarrow % ⟸
+\let\iff\Leftrightarrow  % ⟺
+\let\epsilon\varepsilon  % ε
+
+\AtBeginDocument{\def\labelitemi{$\bullet$}} % change les tirets en points dans les listes
+\AtBeginDocument{\def\labelitemii{$\circ$}}
+
+%%%%%%%%%%%%%
+%  Figures  %
+%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. (Optionnel) Largeur de l'image. Défaut: 3/4 de la largeur du texte.
+% 2. Chemin du fichier de l'image
+% 3. Légende de l'image
+\newcommand{\insertfig}[3][0.75]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{#2}
+    \caption{#3}
+  \end{figure}
+}
+
+% Image temporaire
+\newcommand{\lipsumimage}{
+  \insertfig{./figures/lipsumimage.png}{Lorem Ipsum}
+}
+
+%%%%%%%%%%%%
+%  Tables  %
+%%%%%%%%%%%%
+
+\setlength{\tabcolsep}{5pt}
+\renewcommand\arraystretch{1.5}
+
+%%%%%%%%%%%%%%
+%  SI Unitx  %
+%%%%%%%%%%%%%%
+
+\usepackage{siunitx}
+\sisetup{locale = FR}
+
+%%%%%%%%%%
+%  TikZ  %
+%%%%%%%%%%
+
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{tikzsymbols}
+
+\usetikzlibrary{intersections, angles, quotes, calc, positioning}
+\usetikzlibrary{arrows.meta}
+
+\tikzset{
+  force/.style={thick, {Circle[length=2pt]}-stealth, shorten <=-1pt}
+}
+
+%%%%%%%%%%%%%%%
+%  PGF Plots  %
+%%%%%%%%%%%%%%%
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Centrage de la page de titre  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée un arrière plan gris au milieu d'un PDF  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{eso-pic}
+\newcommand\definegraybackground{
+  \definecolor{reallylightgray}{HTML}{FAFAFA}
+  \AddToShipoutPicture{
+    \ifthenelse{\isodd{\thepage}}{
+      \AtPageLowerLeft{
+        \put(\LenToUnit{\dimexpr\paperwidth-222pt},0){
+          \color{reallylightgray}\rule{222pt}{297mm}
+        }
+      }
+    }
+    {
+      \AtPageLowerLeft{
+        \color{reallylightgray}\rule{222pt}{297mm}
+      }
+    }
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Modifie la couleur des liens  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+  colorlinks,
+  linkcolor=blue,
+  citecolor={black},
+  urlcolor={blue!80!black}
+}
+
+%%%%%%%%%%%%%%%%%%
+% Fix WrapFigure %
+%%%%%%%%%%%%%%%%%%
+
+\newcommand{\wrapfill}{\par\ifnum\value{WF@wrappedlines}>0
+    \parskip=0pt
+    \addtocounter{WF@wrappedlines}{-1}%
+    \null\vspace{\arabic{WF@wrappedlines}\baselineskip}%
+    \WFclear
+\fi}
+
+%%%%%%%%%%%%%%%%%%
+% Multi-Colonnes %
+%%%%%%%%%%%%%%%%%%
+
+\let\multicolmulticols\multicols
+\let\endmulticolmulticols\endmulticols
+
+\RenewDocumentEnvironment{multicols}{mO{}}
+{%
+  \ifnum#1=1
+    #2%
+  \else % Plus qu'une colonne
+    \multicolmulticols{#1}[#2]
+  \fi
+}
+{%
+  \ifnum#1=1
+\else % Plus qu'une colonne
+  \endmulticolmulticols
+\fi
+}
+
+\newlength{\thickarrayrulewidth}
+\setlength{\thickarrayrulewidth}{5\arrayrulewidth}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Commandes spécifiques à l'école                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Initialise le nouveau compteur  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{lecturecounter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  NewCommandes utiles  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+
+\newcommand\resetcounters{
+  % Réinitialise les compteurs de sous section, sous sous section et la
+  % définition de tous les environnements personnalisés.
+  \setcounter{subsection}{0}
+  \setcounter{subsubsection}{0}
+  \setcounter{paragraph}{0}
+  \setcounter{subparagraph}{0}
+  \setcounter{theorem}{0}
+  \setcounter{claim}{0}
+  \setcounter{corollary}{0}
+  \setcounter{lemma}{0}
+  \setcounter{exercise}{0}
+
+  \@ifclasswith\class{nocolor}{
+    \setcounter{definition}{0}
+  }{}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Commandes de chapitre  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xifthen}
+
+% Paramètres:
+% 1. (Optionnel) Numéro du chapitre.
+% 2. Date et heure du chapitre.
+% 3. Titre du chapitre.
+% EXEMPLE:
+% 1. \lesson{Date (Heure)}{Titre du chapitre}
+% 2. \lesson[4]{Date (Heure)}{Titre du chapitre}
+% 3. \lesson{Date (Titre du chapitre)}{}
+% 4. \lesson[4]{Date (Heure)}{}
+\def\@lesson{}
+\newcommand\lesson[3][\arabic{lecturecounter}]{
+  % Incrémente le lecturecounter.
+  \addtocounter{lecturecounter}{1}
+
+  % Met le numéro de section au numéro de chapitre.
+  \setcounter{section}{#1}
+  \renewcommand\thesubsection{#1.\arabic{subsection}}
+
+  % Réinitialise les compteurs.
+  \resetcounters
+
+  % Vérifie si l'utilisateur a fourni le titre du chapitre.
+  \ifthenelse{\isempty{#3}}{
+    \def\@lesson{Chapitre \arabic{lecturecounter}}
+  }{
+    \def\@lesson{Chapitre \arabic{lecturecounter}: #3}
+  }
+
+  % Affiche l'information sous la forme suivante:
+  %                                                                Date (Heure)
+  % ---------------------------------------------------------------------------
+  % Chapitre 1: Titre du chapitre
+  \hfill\small{#2}
+  \hrule
+  \vspace*{-0.3cm}
+  \section*{\@lesson}
+  \addcontentsline{toc}{section}{\@lesson}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%  Import des figures  %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{import}
+\pdfminorversion=7
+
+% Paramètres:
+% 1. Le nom de la figure. Elle doit être dans figures/NOM.tex_pdf.
+% 2. (Optionnel) La largeur de la figure. Exemple: 0.5, 0.35.
+% EXEMPLE:
+% 1. \incfig{limit-graph}
+% 2. \incfig[0.4]{limit-graph}
+\newcommand\incfig[2][1]{%
+  \def\svgwidth{#1\columnwidth}
+  \import{./figures/}{#2.pdf_tex}
+}
+
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname pdfsuppresswarningpagegroup\endcsname\relax
+\else
+  \pdfsuppresswarningpagegroup=1\relax
+\fi
+
+%%%%%%%%%%%%%%%%%
+% Fancy Headers %
+%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+
+% Force une nouvelle page.
+\newcommand\forcenewpage{\clearpage\mbox{~}\clearpage\newpage}
+
+% Cette commande simplifie la gestion des entêtes et pieds de page.
+\newcommand\createintro{
+  % Utilise les chiffres romains (ie. i, v, vi, x, ...).
+  \pagenumbering{roman}
+
+  % Affiche le style de la page.
+  \maketitle
+  % Rend le titre du pagestyle vide, sans fancy headers / footers.
+  \thispagestyle{empty}
+  % Saute une page
+  \newpage
+
+  % Si le fichier "intro.tex" existe, l'ajoute.
+  \IfFileExists{intro.tex}{ % si le fichier existe.
+    % Ajoute le fichier.
+    \input{intro}
+
+    % Rend le pagestyle fancy pour la page intro.tex.
+    \pagestyle{fancy}
+
+    % Retire la ligne de l'entête
+    \renewcommand\headrulewidth{0pt}
+
+    % Retire tout ce qui est lié à l'entête.
+    \fancyhead{}
+
+    % Ajoute ce qui est lié à l'entête au centre.
+    \fancyfoot[C]{
+      \vspace{-2cm} % remonte le pied de page (sinon marge trop petite)
+      \hrule
+      \vspace{0.1cm}
+      \@author \\
+      \term \space \academicyear \\
+      Dernière mise à jour: \@date \\
+      \faculty
+    }
+  }{ % Si le fichier ("intro.tex") n'existe pas.
+    % Force une \newpageage.
+    \forcenewpage
+  }
+
+  % Saute une page.
+  \newpage
+
+  % Comme précédemment, enlève ce qui est lié à l'entête et le remplace par
+  % le numéro de page, toujours en chiffres romains.
+  \fancyfoot[C]{\thepage}
+  % Ajoute la table des matières.
+  \tableofcontents
+  \newpage
+
+  % Change la numérotation des pages en chiffres arabes.
+  \pagenumbering{arabic}
+  % Règle le numéro de page à 1.
+  \setcounter{page}{1}
+
+  % Ajoute la ligne de l'entête précédemment enlevée.
+  \renewcommand\headrulewidth{0.4pt}
+  % Ajoute le titre du chapitre en haut à droite.
+  \fancyhead[R]{\@lesson}
+  % Ajoute le titre de l'auteur en haut à gauche.
+  \fancyhead[L]{\@author}
+  % Ajoute le numéro de page en bas au centre.
+  \fancyfoot[C]{\thepage}
+}
+
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            Commandes personnalisées                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+%  Encercle  %
+%%%%%%%%%%%%%%
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}
+}
+
+%%%%%%%%%%%%%%%%%%%%
+%  Commandes TODO  %
+%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xargs}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\makeatletter
+
+\@ifclasswith\class{working}{
+  \newcommandx\unsure[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+  \newcommandx\change[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+  \newcommandx\info[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+  \newcommandx\improvement[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+
+  \newcommand\listnotes{
+    \newpage
+    \listoftodos[Notes]
+  }
+}{
+  \newcommandx\unsure[2][1=]{}
+  \newcommandx\change[2][1=]{}
+  \newcommandx\info[2][1=]{}
+  \newcommandx\improvement[2][1=]{}
+
+  \newcommand\listnotes{}
+}
+
+\makeatother
+
+%%%%%%%%%%%%%
+%  Correct  %
+%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. L'affirmation incorrecte.
+% 2. L'affirmation correcte.
+% EXEMPLE:
+% 1. \correct{INCORRECT}{CORRECT}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{{\color{red}{#1 }}\ensuremath{\to}{\color{correct}{ #2}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Environnements                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{varwidth}
+\usepackage{thmtools}
+\usepackage[most,many,breakable]{tcolorbox}
+
+\tcbuselibrary{theorems,skins,hooks}
+\usetikzlibrary{arrows,calc,shadows.blur}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Définitions des couleurs  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{myblue}{RGB}{45, 111, 177}
+\definecolor{mygreen}{RGB}{56, 140, 70}
+\definecolor{myred}{RGB}{199, 68, 64}
+\definecolor{mypurple}{RGB}{197, 92, 212}
+
+\definecolor{definition}{HTML}{228b22}
+\definecolor{theorem}{HTML}{00007B}
+\definecolor{example}{HTML}{2A7F7F}
+\definecolor{definition}{HTML}{228b22}
+\definecolor{prop}{HTML}{191971}
+\definecolor{lemma}{HTML}{983b0f}
+\definecolor{exercise}{HTML}{88D6D1}
+
+\colorlet{definition}{mygreen!85!black}
+\colorlet{claim}{mygreen!85!black}
+\colorlet{corollary}{mypurple!85!black}
+\colorlet{proof}{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée des environnements de style basés sur les paramètres  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mdfsetup{skipabove=1em,skipbelow=0em}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%  Commandes utiles  %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. Nom du théorème.
+% 2. N'importe quels paramètres supplémentaires pour declaretheoremstyle.
+% 3. N'importe quels paramètres supplémentaires pour mdframed.
+% EXEMPLE:
+% 1. \createnewtheoremstyle{thmdefinitionbox}{}{}
+% 2. \createnewtheoremstyle{thmtheorembox}{}{}
+% 3. \createnewtheoremstyle{thmproofbox}{qed=\qedsymbol}{
+%       rightline=false, topline=false, bottomline=false
+%    }
+\newcommand\createnewtheoremstyle[3]{
+  \declaretheoremstyle[
+  headfont=\bfseries\sffamily, bodyfont=\normalfont, #2,
+  mdframed={
+    #3,
+  },
+  ]{#1}
+}
+
+% Paramètres:
+% 1. Nom du théorème.
+% 2. Color of theorem.
+% 2. N'importe quels paramètres supplémentaires pour declaretheoremstyle.
+% 3. N'importe quels paramètres supplémentaires pour mdframed.
+% EXEMPLE:
+% 1. \createnewcoloredtheoremstyle{thmdefinitionbox}{definition}{}{}
+% 2. \createnewcoloredtheoremstyle{thmexamplebox}{example}{}{
+%       rightline=true, leftline=true, topline=true, bottomline=true
+%     }
+% 3. \createnewcoloredtheoremstyle{thmproofbox}{proof}{qed=\qedsymbol}{backgroundcolor=white}
+\newcommand\createnewcoloredtheoremstyle[4]{
+  \declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{#2}, bodyfont=\normalfont, #3,
+  mdframed={
+    linewidth=2pt,
+    rightline=false, leftline=true, topline=false, bottomline=false,
+    linecolor=#2, backgroundcolor=#2!5, #4,
+  },
+  ]{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée les environnements de style  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\@ifclasswith\class{nocolor}{
+  % Environnements sans couleurs.
+
+  \createnewtheoremstyle{thmdefinitionbox}{}{}
+  \createnewtheoremstyle{thmtheorembox}{}{}
+  \createnewtheoremstyle{thmexamplebox}{}{}
+  \createnewtheoremstyle{thmclaimbox}{}{}
+  \createnewtheoremstyle{thmcorollarybox}{}{}
+  \createnewtheoremstyle{thmpropbox}{}{}
+  \createnewtheoremstyle{thmlemmabox}{}{}
+  \createnewtheoremstyle{thmexercisebox}{}{}
+  \createnewtheoremstyle{thmdefinitionbox}{}{}
+  \createnewtheoremstyle{thmquestionbox}{}{}
+  \createnewtheoremstyle{thmsolutionbox}{}{}
+
+  \createnewtheoremstyle{thmproofbox}{qed=\qedsymbol}{}
+  \createnewtheoremstyle{thmexplanationbox}{}{}
+}{
+  % Environnements avec couleurs.
+
+  \createnewcoloredtheoremstyle{thmdefinitionbox}{definition}{}{}
+  \createnewcoloredtheoremstyle{thmtheorembox}{theorem}{}{}
+  \createnewcoloredtheoremstyle{thmexamplebox}{example}{}{
+    rightline=true, leftline=true, topline=true, bottomline=true
+  }
+  \createnewcoloredtheoremstyle{thmclaimbox}{claim}{}{}
+  \createnewcoloredtheoremstyle{thmcorollarybox}{corollary}{}{}
+  \createnewcoloredtheoremstyle{thmpropbox}{prop}{}{}
+  \createnewcoloredtheoremstyle{thmlemmabox}{lemma}{}{}
+  \createnewcoloredtheoremstyle{thmexercisebox}{exercise}{}{}
+
+  \createnewcoloredtheoremstyle{thmproofbox}{proof}{qed=\qedsymbol}{backgroundcolor=white}
+  \createnewcoloredtheoremstyle{thmexplanationbox}{example}{qed=\qedsymbol}{backgroundcolor=white}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée les environnements  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\declaretheorem[numberwithin=section, style=thmtheorembox,     name=Théorème]{theorem}
+\declaretheorem[numbered=no,          style=thmexamplebox,     name=Exemple]{example}
+\declaretheorem[numberwithin=section, style=thmclaimbox,       name=Affirmation]{claim}
+\declaretheorem[numberwithin=section, style=thmcorollarybox,   name=Corollaire]{corollary}
+\declaretheorem[numberwithin=section, style=thmpropbox,        name=Proposition]{prop}
+\declaretheorem[numberwithin=section, style=thmlemmabox,       name=Lemme]{lemma}
+\declaretheorem[numberwithin=section, style=thmexercisebox,    name=Exercice]{exercise}
+\declaretheorem[numbered=no,          style=thmproofbox,       name=Preuve]{replacementproof}
+\declaretheorem[numbered=no,          style=thmexplanationbox, name=Preuve]{expl}
+
+\makeatletter
+\@ifclasswith\class{nocolor}{
+  % Environnements sans couleurs.
+
+  \newtheorem*{note}{Note}
+
+  \declaretheorem[numberwithin=section, style=thmdefinitionbox, name=Definition]{definition}
+  \declaretheorem[numberwithin=section, style=thmquestionbox,   name=Question]{question}
+  \declaretheorem[numberwithin=section, style=thmsolutionbox,   name=Solution]{solution}
+}{
+  % Environnements avec couleurs.
+
+  \newtcbtheorem[number within=section]{Definition}{Definition}{
+    enhanced,
+    before skip=2mm,
+    after skip=2mm,
+    colback=red!5,
+    colframe=red!80!black,
+    colbacktitle=red!75!black,
+    boxrule=0.5mm,
+    attach boxed title to top left={
+      xshift=1cm,
+      yshift*=1mm-\tcboxedtitleheight
+    },
+    varwidth boxed title*=-3cm,
+    boxed title style={
+      interior engine=empty,
+      frame code={
+        \path[fill=tcbcolback]
+        ([yshift=-1mm,xshift=-1mm]frame.north west)
+        arc[start angle=0,end angle=180,radius=1mm]
+        ([yshift=-1mm,xshift=1mm]frame.north east)
+        arc[start angle=180,end angle=0,radius=1mm];
+        \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+        middle color=tcbcolback!80!black]
+        ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+        [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+        [sharp corners]-- cycle;
+      },
+    },
+    fonttitle=\bfseries,
+    title={#2},
+    #1
+  }{def}
+
+  \NewDocumentEnvironment{definition}{O{}O{}}
+    {\begin{Definition}{#1}{#2}}{\end{Definition}}
+
+  \newtcolorbox{note}[1][]{%
+    enhanced jigsaw,
+    colback=gray!20!white,%
+    colframe=gray!80!black,
+    size=small,
+    boxrule=1pt,
+    title=\textbf{Note:},
+    halign title=flush center,
+    coltitle=black,
+    breakable,
+    drop shadow=black!50!white,
+    attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+    minipage boxed title=1.5cm,
+    boxed title style={%
+      colback=white,
+      size=fbox,
+      boxrule=1pt,
+      boxsep=2pt,
+      underlay={%
+        \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+        \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+        \begin{scope}
+          \clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+          \filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+        \end{scope}
+        \begin{scope}[gray!80!black]
+          \fill (dotA) circle (2pt);
+          \fill (dotB) circle (2pt);
+        \end{scope}
+      },
+    },
+    #1,
+  }
+
+  \newtcbtheorem{Question}{Question}{enhanced,
+    breakable,
+    colback=white,
+    colframe=myblue!80!black,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+    fonttitle=\bfseries,
+    title=\textbf{Question:},
+    boxed title size=title,
+    boxed title style={
+      sharp corners,
+      rounded corners=northwest,
+      colback=tcbcolframe,
+      boxrule=0pt,
+    },
+    underlay boxed title={
+      \path[fill=tcbcolframe] (title.south west)--(title.south east)
+      to[out=0, in=180] ([xshift=5mm]title.east)--
+      (title.center-|frame.east)
+      [rounded corners=\kvtcb@arc] |-
+      (frame.north) -| cycle;
+    },
+    #1
+  }{def}
+
+  \NewDocumentEnvironment{question}{O{}O{}}
+  {\begin{Question}{#1}{#2}}{\end{Question}}
+
+  \newtcolorbox{Solution}{enhanced,
+    breakable,
+    colback=white,
+    colframe=mygreen!80!black,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+    title=\textbf{Solution:},
+    boxed title size=title,
+    boxed title style={
+      sharp corners,
+      rounded corners=northwest,
+      colback=tcbcolframe,
+      boxrule=0pt,
+    },
+    underlay boxed title={
+      \path[fill=tcbcolframe] (title.south west)--(title.south east)
+      to[out=0, in=180] ([xshift=5mm]title.east)--
+      (title.center-|frame.east)
+      [rounded corners=\kvtcb@arc] |-
+      (frame.north) -| cycle;
+    },
+  }
+
+  \NewDocumentEnvironment{solution}{O{}O{}}
+  {\vspace{-10pt}\begin{Solution}{#1}{#2}}{\end{Solution}}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Environnements d'édition de preuve  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewenvironment{proof}[1][\proofname]{\vspace{-10pt}\begin{replacementproof}}{\end{replacementproof}}
+\newenvironment{explanation}[1][\proofname]{\vspace{-10pt}\begin{expl}}{\end{expl}}
+
+\theoremstyle{definition}
+
+\newtheorem*{notation}{Notation}
+\newtheorem*{previouslyseen}{Comme vu auparavant}
+\newtheorem*{problem}{Problème}
+\newtheorem*{observe}{Obserons que}
+\newtheorem*{property}{Propriété}
+\newtheorem*{intuition}{Intuition}
+\newtheorem*{remark}{Remarque}

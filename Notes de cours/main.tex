@@ -1,0 +1,23 @@
+\documentclass{article}
+
+\input{preamble.tex}
+
+
+\title{Titre du cours}
+\author{Valérien BRAYE}
+\date{\today}
+
+\newcommand{\term}{SEMESTRE} % TODO: compléter
+\newcommand{\academicyear}{$2022$} % TODO: mettre à jour
+\newcommand{\faculty}{Télécom SudParis}
+
+\begin{document}
+  \createintro % TODO: "./intro.tex" à compléter
+
+  \input{chapitres/chapitre1.tex}
+
+  \newpage
+  \nocite{*} % supprimer pour n'inclure que les documents cités dans la bibliographie
+  \bibliographystyle{plain}
+  \bibliography{ref}
+\end{document}
