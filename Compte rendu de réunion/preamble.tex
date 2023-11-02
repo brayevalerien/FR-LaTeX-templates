@@ -1,0 +1,232 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Packages de base                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Réduit la taille des marges
+\usepackage[a4paper, margin=2cm]{geometry}
+% Ajoute plusieurs couleurs.
+\usepackage[usenames,dvipsnames,pdftex]{xcolor}
+% Permet de change le style des liens.
+\usepackage{hyperref}
+% Permet d'importer des images et des graphiques.
+\usepackage{graphicx}
+\graphicspath{{./}}
+% Permet d'utiliser de nouvelles figures dans des environnements flottants.
+\usepackage{float}
+% Meilleure syntaxe pour les maths.
+\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb}
+% Permet de modifier le titre des figures.
+\usepackage{caption}
+% Traduction en Français des mots générés (date, table des matières...) et caractères français.
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+% Ajout de structure conditionnels
+\usepackage{xifthen}
+
+\def\class{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Paramètres de base                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+%  Symboles  %
+%%%%%%%%%%%%%%
+
+\AtBeginDocument{\def\labelitemi{$\bullet$}} % change les tirets en points dans les listes
+\AtBeginDocument{\def\labelitemii{$\circ$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Modifie la couleur des liens  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+  colorlinks,
+  linkcolor=blue,
+  urlcolor={blue!80!black}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Commandes spécifiques à l'école                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Titre avec fancyhdr %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+
+% Cette commande crée le titre du compte rendu.
+% Paramètres:
+% 1. (Optionnel) date du jour
+% 2. Titre
+% 3. (Optionnel) Domaine/projet
+\newcommand\makecustomtitle[3][\today]{
+  \ifthenelse{\isempty{#3}}{
+    \hfill\small{#1}
+  }{
+    \noindent\small{#3}\hfill\small{#1}
+  }
+  \vspace*{0.1cm}
+  \hrule
+  \vspace*{-0.3cm}
+  \section*{\huge{#2}}
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Environnements                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{varwidth}
+\usepackage{thmtools}
+\usepackage[most,many,breakable]{tcolorbox}
+
+\tcbuselibrary{theorems,skins,hooks}
+\usetikzlibrary{arrows,calc,shadows.blur}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Définitions des couleurs  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{myblue}{RGB}{45, 111, 177}
+\definecolor{mygreen}{RGB}{56, 140, 70}
+\definecolor{example}{HTML}{2A7F7F}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%  Commandes utiles  %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. Nom du théorème.
+% 2. Color of theorem.
+% 2. N'importe quels paramètres supplémentaires pour declaretheoremstyle.
+% 3. N'importe quels paramètres supplémentaires pour mdframed.
+% EXEMPLE:
+% 1. \createnewcoloredtheoremstyle{thmdefinitionbox}{definition}{}{}
+% 2. \createnewcoloredtheoremstyle{thmexamplebox}{example}{}{
+%       rightline=true, leftline=true, topline=true, bottomline=true
+%     }
+% 3. \createnewcoloredtheoremstyle{thmproofbox}{proof}{qed=\qedsymbol}{backgroundcolor=white}
+\newcommand\createnewcoloredtheoremstyle[4]{
+  \declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{#2}, bodyfont=\normalfont, #3,
+  mdframed={
+    linewidth=2pt,
+    rightline=false, leftline=true, topline=false, bottomline=false,
+    linecolor=#2, backgroundcolor=#2!5, #4,
+  },
+  ]{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée les environnements de style  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+
+  % Environnements avec couleurs.
+
+\createnewcoloredtheoremstyle{thmexamplebox}{example}{}{
+  rightline=true, leftline=true, topline=true, bottomline=true
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Crée les environnements  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\declaretheorem[numbered=no, style=thmexamplebox, name=Participants]{participants}
+
+\makeatletter
+
+\newtcolorbox{todo}[1][]{%
+  enhanced jigsaw,
+  colback=gray!20!white,%
+  colframe=gray!80!black,
+  size=small,
+  boxrule=1pt,
+  title=\textbf{À faire avant la prochaine fois},
+  halign title=flush center,
+  coltitle=black,
+  breakable,
+  drop shadow=black!50!white,
+  attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+  minipage boxed title=5.5cm,
+  boxed title style={%
+    colback=white,
+    size=fbox,
+    boxrule=1pt,
+    boxsep=2pt,
+    underlay={%
+      \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+      \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+      \begin{scope}
+        \clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+        \filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+      \end{scope}
+      \begin{scope}[gray!80!black]
+        \fill (dotA) circle (2pt);
+        \fill (dotB) circle (2pt);
+      \end{scope}
+    },
+  },
+  #1,
+}
+
+\newtcolorbox{Ordre du jour}{enhanced,
+  breakable,
+  colback=white,
+  colframe=myblue!80!black,
+  attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+  title=\textbf{Ordre du jour},
+  boxed title size=title,
+  boxed title style={
+    sharp corners,
+    rounded corners=northwest,
+    colback=tcbcolframe,
+    boxrule=0pt,
+  },
+  underlay boxed title={
+    \path[fill=tcbcolframe] (title.south west)--(title.south east)
+    to[out=0, in=180] ([xshift=5mm]title.east)--
+    (title.center-|frame.east)
+    [rounded corners=\kvtcb@arc] |-
+    (frame.north) -| cycle;
+  },
+}
+
+\NewDocumentEnvironment{ordredujour}{O{}O{}}
+{\vspace{-10pt}\begin{Ordre du jour}{#1}{#2}}{\end{Ordre du jour}}
+
+
+\newtcolorbox{Notes}{enhanced,
+  breakable,
+  colback=white,
+  colframe=mygreen!80!black,
+  attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+  title=\textbf{Notes},
+  boxed title size=title,
+  boxed title style={
+    sharp corners,
+    rounded corners=northwest,
+    colback=tcbcolframe,
+    boxrule=0pt,
+  },
+  underlay boxed title={
+    \path[fill=tcbcolframe] (title.south west)--(title.south east)
+    to[out=0, in=180] ([xshift=5mm]title.east)--
+    (title.center-|frame.east)
+    [rounded corners=\kvtcb@arc] |-
+    (frame.north) -| cycle;
+  },
+}
+
+\NewDocumentEnvironment{notes}{O{}O{}}
+{\vspace{-10pt}\begin{Notes}{#1}{#2}}{\end{Notes}}
+
+\makeatother
+
+\newtheorem*{remark}{Remarque}

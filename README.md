@@ -25,4 +25,23 @@ Ce modèle reste lourd et le long préambule rend le temps de compilation non n�
 
 Ce modèle est adapté du modèle [Charlie's Math Template](https://github.com/SeniorMars/dotfiles/tree/5b39b3ef545fa41361dfe64a2cbc03d8411a808f/latex_template) par [@SeniorMars](https://github.com/SeniorMars/).
 
-**Note:** la capture d'écran ci-dessus ne montre pas les vraies couleurs du pdf généré (le viewer pdf applique un filtre).
+
+## Compte rendu de réunion
+
+![Capture d'écran du modèle "compte rendu de réunion"](./images/compte_rendu_de_reunion.png)
+
+Ce modèle est un dérivé du modèle de prise de notes de cours, ne conservant que les fonctionnalités utiles:
+- la commande `\makecustomtitle` pour automatiquement formater le titre avec la date et le nom du projet.
+- des environnements personnalisés pour les participants, l'ordre du jour, les notes de réunion...
+
+Ce modèle est utile pour prendre les notes d'une réunion et est destiné à être réutilisé d'une réunion à l'autre.
+Quatre environnements sont en à remplir:
+- participants
+- ordre du jour
+- notes
+- tâches à faires
+Ce modèle est relativement léger et permet de compiler le document pendant la prise de notes sans perdre de temps (environ 3 secondes).
+
+
+---
+**Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
