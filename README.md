@@ -40,6 +40,7 @@ Quatre environnements sont en à remplir:
 - ordre du jour
 - notes
 - tâches à faires
+
 Ce modèle est relativement léger et permet de compiler le document pendant la prise de notes sans perdre de temps (environ 3 secondes).
 
 
