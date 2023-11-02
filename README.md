@@ -24,4 +24,5 @@ Ce modèle est utile pour la prise de notes d'un cours pendant une session enti�
 Ce modèle reste lourd et le long préambule rend le temps de compilation non négligeable (autour de 15 secondes pour un petit chapitre), il ne convient donc pas à tous les usages.
 
 Ce modèle est adapté du modèle [Charlie's Math Template](https://github.com/SeniorMars/dotfiles/tree/5b39b3ef545fa41361dfe64a2cbc03d8411a808f/latex_template) par [@SeniorMars](https://github.com/SeniorMars/).
+
 **Note:** la capture d'écran ci-dessus ne montre pas les vraies couleurs du pdf généré (le viewer pdf applique un filtre).
