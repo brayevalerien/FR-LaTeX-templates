@@ -22,6 +22,8 @@
 \usepackage[T1]{fontenc}
 % Ajout de structure conditionnels
 \usepackage{xifthen}
+% Entête pour chaque page
+\usepackage{fancyhdr}
 
 \def\class{article}
 
@@ -56,21 +58,24 @@
 
 \makeatletter
 
+
 % Cette commande crée le titre du compte rendu.
 % Paramètres:
 % 1. (Optionnel) date du jour
 % 2. Titre
 % 3. (Optionnel) Domaine/projet
 \newcommand\makecustomtitle[3][\today]{
-  \ifthenelse{\isempty{#3}}{
-    \hfill\small{#1}
-  }{
-    \noindent\small{#3}\hfill\small{#1}
+  \fancypagestyle{plain}{
+    \fancyhf{} % assure d'enlever tout ce qu'il y a dans l'entête avant de la personnaliser
+    \ifthenelse{\isempty{#3}}{ % si le nom de projet a été fourni
+      \fancyhead[R]{#1} % ajout de la date
+    }{
+      \fancyhead[L]{#3} % ajout du nom du projet
+      \fancyhead[R]{#1} % ajout de la date
+    }
   }
-  \vspace*{0.1cm}
-  \hrule
-  \vspace*{-0.3cm}
-  \section*{\huge{#2}}
+  \pagestyle{plain} % utilise l'entête pour toutes les pages
+  \section*{\huge{#2}} % titre du rapport
 }
 
 \makeatother
