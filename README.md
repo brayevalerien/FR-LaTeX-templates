@@ -6,7 +6,10 @@
 ---
 
 # FR-LaTeX-templates
-Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui me sont souvent utiles.
+Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui me sont souvent utiles:
+1. [Notes de cours](#notes-de-cours)
+1. [Compte rendu de réunion](#compte-rendu-de-réunion)
+1. [Lettre formelle](#lettre-formelle)
 
 ## Notes de cours
 
