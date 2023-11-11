@@ -1,0 +1,26 @@
+\documentclass{letter}
+
+\input{preamble}
+
+\usepackage{lipsum} % Pour utiliser du texte temporaire, à supprimer
+
+\signature{NOM Prénom} % TODO: à compléter
+\address{
+    Adresse de l'expéditeur % TODO: à compléter
+}
+\date{\today}
+
+\begin{document}
+\begin{letter}{}
+    Adresse du destinataire
+    
+    \ouverture
+
+    \lipsum[1-3]
+
+    \cloture
+    \signe
+
+    \ps{P.S. \lipsum[4]}
+\end{letter}
+\end{document}

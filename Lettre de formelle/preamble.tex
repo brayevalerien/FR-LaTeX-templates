@@ -1,0 +1,42 @@
+% Adapte le format et les marge
+\usepackage[letterpaper, margin=3cm]{geometry}
+% Ajoute le support d'UTF-8
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Traduction en Français des mots clefs
+\usepackage[french]{babel}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Formules de politesse   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ajoute la formule d'ouverture de la lettre, ainsi que les coordonnées du destinataire et de l'expéditeur et la date.
+% Par défaut "Madame, Monsieur"
+\newcommand{\ouverture}[1][Madame, Monsieur]{
+    \opening{#1,}
+}
+
+% Ajoute la formule de clôture de la lettre. Attention, n'inclut pas la signature.
+% Par défaut "Cordialement"
+% Remarque: closing n'est pas utilisée par manque de flexibilité, mais le code suivant s'en inspire.
+\newcommand{\cloture}[1][Cordialement]{
+    \par\nobreak\vspace{\parskip}%
+    \stopbreaks
+    \noindent
+    \hspace*{4em}
+    \parbox{.75\textwidth}{
+        \bigskip
+        \raggedright
+        \ignorespaces #1, \\
+        \bigskip
+    }%
+    \par
+}
+
+% Ajoute une signature. Requiert que \signature{} soit utilisée avant.
+\newcommand{\signe}{
+    \bigskip
+    \hfill\fromsig
+    \bigskip
+}

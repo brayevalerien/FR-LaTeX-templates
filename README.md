@@ -44,5 +44,16 @@ Quatre environnements sont en à remplir:
 Ce modèle est relativement léger et permet de compiler le document pendant la prise de notes sans perdre de temps (environ 3 secondes).
 
 
+## Lettre formelle
+
+![Capture d'écran du modèle "lettre formelle"](./images/lettre_formelle.png)
+
+Modèle destiné à l'écriture de lettres formelles (lettres aux administrations, lettres de motivation...) et ne définit donc que les commandes utiles à ce type de documents. Voici ses caractéristiques:
+- mise en page classique des lettres formelles
+- des commandes pour les formules de politesse (salutations et clôture), avec des valeurs par défaut
+- `\signe` permettant d'ajouter une signature
+
+Le modèle est minimaliste mais permet de rédiger une lettre rapidement sans besoin de manipuler un nombre trop importants de commandes.
+
 ---
 **Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
