@@ -13,6 +13,7 @@ Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui m
 1. [Schémas Tikz](#tikz)
     1. [Ligne temporelle](#ligne-temporelle)
     1. [Graphique de lois normales](#graphique-représentant-des-lois-normales)
+    1. [p-valeur](#p-valeur)
 
 ## Notes de cours
 
@@ -71,6 +72,10 @@ Le répertoire [Tikz](./Tikz/) contient des schémas créés en utilisant le pac
 ### Graphique représentant des lois normales
 Ce graphique utilise également le package pgfplots.
 ![Capture d'écran du modèle "graphique représentant des lois normales"](./images/graphique_normales.png)
+
+### p-valeur
+Ce graphique utilise également le package pgfplots.
+![Capture d'écran du modèle "p-valeur"](./images/p-valeur.png)
 
 ---
 **Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
