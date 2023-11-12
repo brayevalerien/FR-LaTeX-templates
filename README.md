@@ -12,6 +12,7 @@ Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui m
 1. [Lettre formelle](#lettre-formelle)
 1. [Schémas Tikz](#tikz)
     1. [Ligne temporelle](#ligne-temporelle)
+    1. [Graphique de lois normales](#graphique-représentant-des-lois-normales)
 
 ## Notes de cours
 
@@ -61,11 +62,15 @@ Modèle destiné à l'écriture de lettres formelles (lettres aux administration
 Le modèle est minimaliste mais permet de rédiger une lettre rapidement sans besoin de manipuler un nombre trop importants de commandes.
 
 
-## Tikz
-Le répertoire [Tikz](./Tikz/) contient des schémas créés en utilisant la librairie Tikz. Le code de chacun des schémas est aisément modifiable pour pouvoir les adapter aux besoins du moment.
+## Schémas Tikz
+Le répertoire [Tikz](./Tikz/) contient des schémas créés en utilisant le package Tikz. Le code de chacun des schémas est aisément modifiable pour pouvoir les adapter aux besoins du moment.
 
 ### Ligne temporelle
 ![Capture d'écran du modèle "ligne temporelle"](./images/ligne_temporelle.png)
+
+### Graphique représentant des lois normales
+Ce graphique utilise également le package pgfplots.
+![Capture d'écran du modèle "graphique représentant des lois normales"](./images/graphique_normales.png)
 
 ---
 **Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
