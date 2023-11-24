@@ -1,0 +1,45 @@
+\documentclass[tikz, margin=5mm]{standalone}
+
+% Dessine un réseau de neurones type fnn à trois couches (entrée, couche cachée, sortie).
+% Les arguments sont les tailles des couches.
+\newcommand{\fnn}[3]{
+  \begin{tikzpicture}[
+    neuron/.style={draw, circle},
+    >=stealth, % style des flèches
+  ]
+    % Les commandes ci-dessous permettent de régler les espacement entre les noeuds
+    \newcommand*{\neuronsep}{1} % espacement vertical entre les neurones
+    \newcommand*{\layersep}{2.5} % espacement horizontal entre les couches
+
+    % Première couche
+    \foreach \neuron in {1, ..., #1} {
+      \node[neuron] (l1_\neuron) at (-\layersep, #1*0.5-\neuron*\neuronsep) {$x_{\neuron}^1$};
+    }
+    % Deuxième couche
+    \foreach \neuron in {1, ..., #2} {
+      \node[neuron] (l2_\neuron) at (0, #2*0.5-\neuron*\neuronsep) {$x_{\neuron}^2$};
+    }
+    % Troisième couche
+    \foreach \neuron in {1, ..., #3} {
+      \node[neuron] (l3_\neuron) at (\layersep, #3*0.5-\neuron*\neuronsep) {$x_{\neuron}^3$};
+    }
+
+    % Connexions entre les couches 1 et 2
+    \foreach \source in {1, ..., #1} {
+      \foreach \dest in {1, ..., #2} {
+        \draw[->] (l1_\source.east) -- (l2_\dest.west);
+      }
+    }
+    % Connexions entre les couches 2 et 3
+    \foreach \source in {1, ..., #2} {
+      \foreach \dest in {1, ..., #3} {
+        \draw[->] (l2_\source.east) -- (l3_\dest.west);
+      }
+    }
+  \end{tikzpicture}
+}
+
+
+\begin{document}
+\fnn{4}{5}{2}
+\end{document}

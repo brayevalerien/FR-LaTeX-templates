@@ -77,5 +77,9 @@ Ce graphique utilise également le package pgfplots.
 Ce graphique utilise également le package pgfplots.
 ![Capture d'écran du modèle "p-valeur"](./images/p-valeur.png)
 
+### p-valeur
+Un perceptron multicouches (réseau de neurones feedforward) à 3 couches, dessinable avec la commande `\fnn`, qui prend en arguments la taille des couches. Pour changer le nombre de couche, il faut changer la définition de cette commande, ce qui relativement aisé pour un nombre de couches connu à l'avance.
+![Capture d'écran du modèle "réseau de neurones"](./images/fnn.png)
+
 ---
 **Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
