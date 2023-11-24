@@ -14,6 +14,7 @@ Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui m
     1. [Ligne temporelle](#ligne-temporelle)
     1. [Graphique de lois normales](#graphique-représentant-des-lois-normales)
     1. [p-valeur](#p-valeur)
+    1. [Réseau de neurones](#réseau-de-neurones)
 
 ## Notes de cours
 
@@ -77,7 +78,7 @@ Ce graphique utilise également le package pgfplots.
 Ce graphique utilise également le package pgfplots.
 ![Capture d'écran du modèle "p-valeur"](./images/p-valeur.png)
 
-### p-valeur
+### Réseau de neurones
 Un perceptron multicouches (réseau de neurones feedforward) à 3 couches, dessinable avec la commande `\fnn`, qui prend en arguments la taille des couches. Pour changer le nombre de couche, il faut changer la définition de cette commande, ce qui relativement aisé pour un nombre de couches connu à l'avance.
 ![Capture d'écran du modèle "réseau de neurones"](./images/fnn.png)
 
