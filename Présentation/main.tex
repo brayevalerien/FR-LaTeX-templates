@@ -1,0 +1,76 @@
+\documentclass[
+    11pt, aspectratio = 169,
+    xcolor = {dvipsnames},
+    hyperref = {pdftex, pdfpagemode=UseNone, hidelinks, pdfdisplaydoctitle=true},
+    usepdftitle = false
+]{beamer}
+
+\input{preamble.tex}
+
+% Informations sur la présentation à compléter
+\title{Titre de la présentation} % TODO: à compléter
+\subtitle{Sous-titre de la présentation} % TODO: à compléter (optionnel)
+\author{Nom Prénom} % TODO: à compléter
+\date{\today} % date du jour par défaut, modifiable si besoin
+
+\begin{document}
+
+\titleframe
+
+\itemizeframe{Listes non ordonnées}{
+    \item élément
+    \item élément
+    \begin{itemize}
+        \item sous-élément
+        \item sous-élément
+    \end{itemize}
+    \item élément
+}
+
+\itemizeframeanimated{Listes non ordonnées animées}{
+    \item élément
+    \item élément
+    \item élément
+}
+
+\enumerateframe{Listes ordonnées}{
+    \item élément
+    \item élément
+    \begin{enumerate}
+        \item sous-élément
+        \item sous-élément
+    \end{enumerate}
+    \item élément
+}
+
+\chapterframe{Titre de la partie}{Sous-titre de la partie}
+
+\begin{frame}
+    \frametitle{Différentes alertes}
+    \begin{itemize}
+        \item Alerte standard: \stdalert{texte important}
+        \item Alerte standard au deuxième clic: \stdalert[2]{texte important}
+        \item Alerte standard au troisième clic: \stdalert[3]{texte important}
+        \item Trois alertes pour les nombres:
+              \begin{itemize}
+                  \item Nombre positif: \galert{+5}
+                  \item Nombre négatif: \ralert{-10}
+                  \item Nombre nul: \balert{0.0}
+              \end{itemize}
+        \item Couleur seulement après le premier clic:
+              \begin{itemize}
+                  \item Nombre positif: \galert[2-3]{+5}
+                  \item Nombre négatif: \ralert[2-3]{-10}
+                  \item Nombre nul: \balert[2-3]{0.0}
+              \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\lastframe[
+    Phrase de fin\\
+    \small(optionnelle)
+]
+
+\figframe{Annexe}{./figures/lipsumimage}{Image de l'annexe}
+
+\end{document}

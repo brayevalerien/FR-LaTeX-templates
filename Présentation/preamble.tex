@@ -1,0 +1,286 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Paramètres de base                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Certains packages sont déjà importés automatiquement par Beamer
+% C'est le cas par exemple de xcolor, amsmath, amsthm, calc et hyperref
+
+% Traduction de certains éléments en français + encodage valide des caractères spéciaux
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+% Polices personnalisées
+\usefonttheme{professionalfonts}
+\usepackage{sourcesanspro}
+\usepackage{sourcecodepro}
+% Symboles mathématiques
+\usepackage{amsmath, amssymb, eucal, bbold, bm}
+% Formatage des symboles mathématiques
+\usepackage[italic, eulergreek, symbolmisc]{mathastext}
+% Permet une meilleure définition des commandes 
+\usepackage{xparse}
+% Personnalisation des légendes de graphiques
+\usepackage{caption}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Thème                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+%  Thème Beamer  %
+%%%%%%%%%%%%%%%%%%
+
+% Ce thème utilise comme base le thème Boadilla, chargé par les lignes suivantes
+\usetheme{Boadilla}
+\usecolortheme[]{seagull}
+
+% Rend les éléments cachés invisibles (pour les animations)
+\setbeamercovered{invisible}
+
+% Suppression des symboles de navigation en pieds de page
+\setbeamertemplate{navigation symbols}{}
+
+% Taille des différents éléments
+\setbeamerfont{title}{size=\fontsize{40}{35}, series=\scshape}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{frametitle}{series=\scshape}
+\setbeamertemplate{frametitle}{\huge\MakeLowercase{\vspace{.25cm}\insertframetitle}}
+\setbeamertemplate{frametitle continuation}{[\insertcontinuationcount]}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{button}{size=\footnotesize}
+
+%%%%%%%%%%%%%%
+%  Couleurs  %
+%%%%%%%%%%%%%%
+
+% Les couleurs utilisées dans ce thème sont celles du thème Monokai Pro avec le filtre classique.
+% Plus de couleurs sont disponibles à:
+% https://gist.github.com/brayevalerien/cb94ac685ebc186f359deae113b6710c
+
+\definecolor{background}{HTML}{272822}
+\definecolor{button}{HTML}{414339}
+\definecolor{textwhite}{HTML}{f8f8f2}
+\definecolor{textgray}{HTML}{75715e}
+\definecolor{textred}{HTML}{f92672}
+\definecolor{textgreen}{HTML}{a6e22e}
+\definecolor{textblue}{HTML}{66d9ef}
+\definecolor{textmagenta}{HTML}{ae81ff}
+\definecolor{textpurple}{HTML}{8c6bc8}
+
+% Pour utiliser un thème clair, commenter les les couleurs définies ci-dessus et dé-commenter celles définies ci-dessous.
+% Les couleurs utilisées dans ce thème sont celles du thème Monokai Light.
+% Thème par @zoxon sur github:
+% https://github.com/zoxon/vscode-theme-monokai-light/
+
+% \definecolor{background}{HTML}{fafafa}
+% \definecolor{button}{HTML}{414339}
+% \definecolor{textwhite}{HTML}{49483e}
+% \definecolor{textgray}{HTML}{75715E}
+% \definecolor{textred}{HTML}{f9005a}
+% \definecolor{textgreen}{HTML}{679c00}
+% \definecolor{textblue}{HTML}{0089b3}
+% \definecolor{textmagenta}{HTML}{8c6bc8}
+% \definecolor{textpurple}{HTML}{ae81ff}
+
+
+\setbeamercolor{background canvas}{bg=background}
+\setbeamercolor{title}{fg=textmagenta}
+\setbeamercolor{frametitle}{fg=textmagenta}
+\setbeamercolor{normal text}{fg=textwhite}
+\setbeamercolor{itemize item}{fg=textgray}
+\setbeamercolor{itemize subitem}{fg=textgray}
+\setbeamercolor{enumerate item}{fg=textgray}
+\setbeamercolor{enumerate subitem}{fg=textgray}
+\setbeamercolor{footline}{fg=textpurple}
+\setbeamercolor{caption name}{fg=textwhite}
+\setbeamercolor{button}{fg=textgray, bg=button}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%  Numéro de slides  %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Ne conserve que: <n° slide actuelle>/<nombre de slides>
+\setbeamertemplate{footline}[frame number]
+
+%%%%%%%%%%%%%%%%%%%%
+%  Slide de titre  %
+%%%%%%%%%%%%%%%%%%%%
+
+% Capitalisation du titre
+\let\oldtitle\title
+\renewcommand{\title}[1]{\oldtitle[]{\MakeLowercase{#1}}}
+
+%%%%%%%%%%%%
+%  Listes  %
+%%%%%%%%%%%%
+
+% Utilise des points pour les listes non ordonnées
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\circ$}
+
+% Utilise des chiffres puis des lettres minuscules pour les listes ordonnées
+\setbeamertemplate{enumerate item}{\arabic{enumi}.}
+\setbeamertemplate{enumerate subitem}{\alph{enumii}.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Commandes utiles                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+%  Symboles  %
+%%%%%%%%%%%%%%
+
+\let\implies\Rightarrow  % ⟹
+\let\impliedby\Leftarrow % ⟸
+\let\iff\Leftrightarrow  % ⟺
+\let\epsilon\varepsilon  % ε
+
+%%%%%%%%%%%%%
+%  Alertes  %
+%%%%%%%%%%%%%
+
+% Alerte standard (toujours rouge)
+\NewDocumentCommand{\stdalert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textred}{#2}}%
+    {\textcolor<#1>{textred}{#2}}
+}
+
+% Alerte verte
+\NewDocumentCommand{\galert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textgreen}{#2}}%
+    {\textcolor<#1>{textgreen}{#2}}
+}
+
+% Alerte rouge 
+\NewDocumentCommand{\ralert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textred}{#2}}%
+    {\textcolor<#1>{textred}{#2}}
+}
+
+% Alerte bleue
+\NewDocumentCommand{\balert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textblue}{#2}}%
+    {\textcolor<#1>{textblue}{#2}}
+}
+
+%%%%%%%%%%%%%
+%  Figures  %
+%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. (Optionnel) Largeur de l'image. Défaut: 3/4 de la largeur du texte.
+% 2. Chemin du fichier de l'image
+% 3. Légende de l'image
+\newcommand{\insertfig}[3][0.65]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{#2}
+    \caption{#3}
+  \end{figure}
+}
+
+% Image temporaire
+\newcommand{\lipsumimage}[1][Lorem Ipsum]{
+  \insertfig{./figures/lipsumimage}{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%  Frames par défaut  %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Frame de titre
+% Les information apparaissant sur cette frame sont à définir au début de main.tex
+\newcommand{\titleframe}{
+    \begin{frame}
+        \titlepage
+    \end{frame}
+}
+
+% Frame de titre de partie
+% Arguments:
+% 1. Titre
+% 2. Sous-titre
+\newcommand{\chapterframe}[2]{
+    \begin{frame}
+        \huge\scshape\color{textmagenta}\MakeLowercase{#1}\\
+        \normalsize\color{textwhite}#2
+    \end{frame}
+}
+
+% Frame avec une liste non ordonnée
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\itemizeframe}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{itemize}
+            #2
+        \end{itemize}
+    \end{frame}
+}
+
+% Frame avec une liste non ordonnée dont les éléments apparaissent progressivement 
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\itemizeframeanimated}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{itemize}[<+->]
+            #2
+        \end{itemize}
+    \end{frame}
+}
+
+% Frame avec une liste ordonnée
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\enumerateframe}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{enumerate}
+            #2
+        \end{enumerate}
+    \end{frame}
+}
+
+% Frame avec une liste ordonnée dont les éléments apparaissent progressivement 
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\enumerateframeanimated}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{enumerate}[<+->]
+            #2
+        \end{enumerate}
+    \end{frame}
+}
+
+% Paramètres:
+% 1. (Optionnel) Largeur de l'image. Défaut: 3/4 de la largeur du texte.
+% 2. Titre de la frame
+% 3. Chemin du fichier de l'image
+% 4. Légende de l'image
+\newcommand{\figframe}[4][.65]{
+    \begin{frame}
+        \frametitle{#2}
+        \insertfig[#1]{#3}{#4}
+    \end{frame}
+}
+
+% Dernière slide (avant d'éventuelles annexes)
+% Argument:
+% 1. Phrase de fin (remerciement, call-to-action...) (optionnelle)
+\newcommand{\lastframe}[1][Merci pour votre attention.]{
+    {
+        \setbeamercolor{background canvas}{bg=textwhite}
+        \begin{frame}
+            \huge\color{background}#1
+        \end{frame}
+    }
+    \appendix % tout ce qui suit n'apparaîtra pas dans la TOC
+}
