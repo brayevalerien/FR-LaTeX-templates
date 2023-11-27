@@ -18,6 +18,8 @@
 \usepackage[italic, eulergreek, symbolmisc]{mathastext}
 % Permet une meilleure définition des commandes 
 \usepackage{xparse}
+% Personnalisation des légendes de graphiques
+\usepackage{caption}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,8 +95,11 @@
 %  Listes  %
 %%%%%%%%%%%%
 
+% Utilise des points pour les listes non ordonnées
 \setbeamertemplate{itemize item}{$\bullet$}
 \setbeamertemplate{itemize subitem}{$\circ$}
+
+% Utilise des chiffres puis des lettres minuscules pour les listes ordonnées
 \setbeamertemplate{enumerate item}{\arabic{enumi}.}
 \setbeamertemplate{enumerate subitem}{\alph{enumii}.}
 
@@ -124,6 +129,18 @@
         \huge\scshape\color{textmagenta}\MakeLowercase{#1}\\
         \normalsize\color{textwhite}#2
     \end{frame}
+}
+
+% Dernière slide (avant d'éventuelles annexes)
+% Argument:
+% 1. Phrase de fin (remerciement, call-to-action...)
+\newcommand{\lastframe}[1][Merci pour votre attention.]{
+    {
+        \setbeamercolor{background canvas}{bg=textwhite}
+        \begin{frame}
+            \huge\color{background}#1
+        \end{frame}
+    }
 }
 
 %%%%%%%%%%%%%%
@@ -161,22 +178,4 @@
 \NewDocumentCommand{\balert}{o g}{%
     \IfNoValueTF{#1}{\textcolor{textblue}{#2}}%
     {\textcolor<#1>{textblue}{#2}}
-}
-
-% --- Tables & figures  ---
-
-\usepackage{multirow, booktabs}
-
-% Captions
-\usepackage{caption}
-\captionsetup{labelformat = empty, size = normalsize}
-
-% Centered figures
-\let\oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{\centering\oldincludegraphics[#1]{#2}}
-
-% --- Last slide ---
-
-\newcommand{\lastslide}{
-    {\setbeamercolor{normal text}{bg=background, fg=textwhite}\begin{frame}\end{frame}}
 }
