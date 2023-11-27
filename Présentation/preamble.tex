@@ -1,0 +1,182 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Paramètres de base                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Certains packages sont déjà importés automatiquement par Beamer
+% C'est le cas par exemple de xcolor, amsmath, amsthm, calc et hyperref
+
+% Traduction de certains éléments en français + encodage valide des caractères spéciaux
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+% Polices personnalisées
+\usefonttheme{professionalfonts}
+\usepackage{sourcesanspro}
+\usepackage{sourcecodepro}
+% Symboles mathématiques
+\usepackage{amsmath, amssymb, eucal, bbold, bm}
+% Formatage des symboles mathématiques
+\usepackage[italic, eulergreek, symbolmisc]{mathastext}
+% Permet une meilleure définition des commandes 
+\usepackage{xparse}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Thème                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+%  Thème Beamer  %
+%%%%%%%%%%%%%%%%%%
+
+% Ce thème utilise comme base le thème Boadilla, chargé par les lignes suivantes
+\usetheme{Boadilla}
+\usecolortheme[]{seagull}
+\setbeamercovered{transparent}
+
+% Suppression des symboles de navigation en pieds de page
+\setbeamertemplate{navigation symbols}{}
+
+% Taille des différents éléments
+\setbeamerfont{title}{size=\huge, series=\scshape}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{frametitle}{series=\scshape}
+\setbeamertemplate{frametitle}{\MakeLowercase{\insertframetitle}}
+\setbeamertemplate{frametitle continuation}{[\insertcontinuationcount]}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{button}{size=\footnotesize}
+
+%%%%%%%%%%%%%%
+%  Couleurs  %
+%%%%%%%%%%%%%%
+
+% Les couleurs utilisées dans ce thème sont celles du thème Monokai Pro avec le filtre classique.
+% Plus de couleurs sont disponibles à:
+% https://gist.github.com/brayevalerien/cb94ac685ebc186f359deae113b6710c
+
+\definecolor{background}{HTML}{272822}
+\definecolor{button}{HTML}{414339}
+\definecolor{textwhite}{HTML}{f8f8f2}
+\definecolor{textgray}{HTML}{75715e}
+\definecolor{textred}{HTML}{f92672}
+\definecolor{textgreen}{HTML}{a6e22e}
+\definecolor{textblue}{HTML}{66d9ef}
+\definecolor{textmagenta}{HTML}{ae81ff}
+\definecolor{textpurple}{HTML}{8c6bc8}
+
+\setbeamercolor{background canvas}{bg=background}
+\setbeamercolor{title}{fg=textmagenta}
+\setbeamercolor{frametitle}{fg=textmagenta}
+\setbeamercolor{normal text}{fg=textwhite}
+\setbeamercolor{itemize item}{fg=textgray}
+\setbeamercolor{itemize subitem}{fg=textgray}
+\setbeamercolor{enumerate item}{fg=textgray}
+\setbeamercolor{enumerate subitem}{fg=textgray}
+\setbeamercolor{footline}{fg=textpurple}
+\setbeamercolor{button}{fg=textgray, bg=button}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%  Numéro de slides  %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Ne conserve que: <n° slide actuelle>/<nombre de slides>
+\setbeamertemplate{footline}[frame number]
+
+%%%%%%%%%%%%%%%%%%%%
+%  Slide de titre  %
+%%%%%%%%%%%%%%%%%%%%
+
+% Capitalisation du titre
+\let\oldtitle\title
+\renewcommand{\title}[1]{\oldtitle[]{\MakeLowercase{#1}}}
+
+%%%%%%%%%%%%
+%  Listes  %
+%%%%%%%%%%%%
+
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\circ$}
+\setbeamertemplate{enumerate item}{\arabic{enumi}.}
+\setbeamertemplate{enumerate subitem}{\alph{enumii}.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Commandes utiles                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%  Frames par défaut  %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Frame de titre
+% Les information apparaissant sur cette frame sont à définir au début de main.tex
+\newcommand{\titleframe}{
+    \begin{frame}
+        \titlepage
+    \end{frame}
+}
+
+% Frame de titre de partie
+% Arguments:
+% 1. Titre
+% 2. Sous-titre
+\newcommand{\chapterframe}[2]{
+    \begin{frame}
+        \huge\scshape\color{textmagenta}\MakeLowercase{#1}\\
+        \normalsize\color{textwhite}#2
+    \end{frame}
+}
+
+%%%%%%%%%%%%%%
+%  Symboles  %
+%%%%%%%%%%%%%%
+
+\let\implies\Rightarrow  % ⟹
+\let\impliedby\Leftarrow % ⟸
+\let\iff\Leftrightarrow  % ⟺
+\let\epsilon\varepsilon  % ε
+
+%%%%%%%%%%%%%
+%  Alertes  %
+%%%%%%%%%%%%%
+
+% Alerte standard (toujours rouge)
+\NewDocumentCommand{\stdalert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textred}{#2}}%
+    {\textcolor<#1>{textred}{#2}}
+}
+
+% Alerte verte
+\NewDocumentCommand{\galert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textgreen}{#2}}%
+    {\textcolor<#1>{textgreen}{#2}}
+}
+
+% Alerte rouge 
+\NewDocumentCommand{\ralert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textred}{#2}}%
+    {\textcolor<#1>{textred}{#2}}
+}
+
+% Alerte bleue
+\NewDocumentCommand{\balert}{o g}{%
+    \IfNoValueTF{#1}{\textcolor{textblue}{#2}}%
+    {\textcolor<#1>{textblue}{#2}}
+}
+
+% --- Tables & figures  ---
+
+\usepackage{multirow, booktabs}
+
+% Captions
+\usepackage{caption}
+\captionsetup{labelformat = empty, size = normalsize}
+
+% Centered figures
+\let\oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{\centering\oldincludegraphics[#1]{#2}}
+
+% --- Last slide ---
+
+\newcommand{\lastslide}{
+    {\setbeamercolor{normal text}{bg=background, fg=textwhite}\begin{frame}\end{frame}}
+}

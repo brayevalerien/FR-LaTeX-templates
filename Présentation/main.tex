@@ -1,0 +1,156 @@
+\documentclass[
+    9pt, aspectratio = 169,
+    xcolor = {dvipsnames},
+    hyperref = {pdftex, pdfpagemode=UseNone, hidelinks, pdfdisplaydoctitle=true},
+    usepdftitle = false
+]{beamer}
+
+\input{preamble.tex}
+
+% Enter title of presentation PDF:
+% \hypersetup{pdftitle={Presentation Title}}
+% Enter link to PDF file with figures:
+% \newcommand{\pdf}{figures.pdf}
+
+\title{Titre de la présentation} % TODO: à compléter
+\subtitle{Sous-titre de la présentation} % TODO: à compléter (optionnel)
+\author{Nom Prénom} % TODO: à compléter
+\date{\today} % date du jour par défaut, modifiable si besoin
+
+\begin{document}
+
+\titleframe
+
+% Fill out content of presentation:
+\begin{frame}
+    \frametitle{Listes non ordonnées}
+    \begin{itemize}
+        \item élément
+        \item élément
+        \begin{itemize}
+            \item sous-élément
+            \item sous-élément
+        \end{itemize}
+        \item élément
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Listes ordonnées}
+    \begin{enumerate}
+        \item élément
+        \item élément
+        \begin{enumerate}
+            \item sous-élément
+            \item sous-élément
+        \end{enumerate}
+        \item élément
+    \end{enumerate}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Slide with a very, very long title: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
+%     Lorem ipsum:
+%     \begin{itemize}
+%         \item item
+%         \item item
+%         \item item
+%         \item item
+%         \item item
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Slide with nested list}
+%     \begin{itemize}
+%         \item item
+%         \item item
+%         \item item
+%               \begin{itemize}
+%                   \item item
+%                   \item item
+%                   \item item
+%                   \item item
+%               \end{itemize}
+%         \item item
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Slide with numbered list}
+%     \begin{enumerate}
+%         \item item
+%         \item item
+%         \item item
+%         \item item
+%         \item item
+%         \item item
+%     \end{enumerate}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Slide with nested numbered list}
+%     \begin{enumerate}
+%         \item item
+%         \item item
+%         \item item
+%               \begin{enumerate}
+%                   \item item
+%                   \item item
+%                   \item item
+%                   \item item
+%               \end{enumerate}
+%         \item item
+%         \item item
+%     \end{enumerate}
+% \end{frame}
+
+% \begin{frame}
+%     \heading{Section title}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Slide with math}
+%     \begin{itemize}
+%         \item Here are some Greek letters in math: $\alpha + \Gamma - \zeta \times \Lambda$
+%         \item Here are some blackboard bold letters: $\mathbb{R} + \mathbb{Q} - \mathbb{Z}$
+%         \item Here are some calligraphic letters: $\mathcal{A} - \mathcal{B} + \mathcal{Z} / \mathcal{H}$
+%         \item Here are some symbols and operators: $\ln(u) \in Q \to \cos(\theta) \leq \sin(\pi)$
+%         \item Here is an equation:
+%               \begin{equation*}
+%                   \int_{0}^{\infty}e^{-\delta t} \ln(c_{j}(t))+ \mathcal{U}(b_{j}(t) - \mathcal{B}(t))- \frac{\zeta}{4} h_{j}(t) -\frac{\gamma}{8} \pi_{j}(t)^2\,\dt
+%               \end{equation*}
+%         \item Here is a display with two equations, including bold math:
+%               \begin{align*}
+%                   \bm{c}(\bm{t}) & = \prod_{j} \prod_{k} \bm{c}_{jk}(\bm{t})^{(\epsilon-1)/\epsilon}      \\
+%                   \dot{b}_{j}(t) & = i(t) b_{j}(t) + p_{j}(t)  y_{j}(t) - \sum_0^1 p_{k}(t) c_{j}(t)
+%               \end{align*}
+%     \end{itemize}
+% \end{frame}
+
+\chapterframe{Titre de la partie}{Sous-titre de la partie}
+
+\begin{frame}
+    \frametitle{Les différentes alertes}
+    \begin{itemize}
+        \item Alerte standard: \stdalert{texte important}
+        \item Alerte standard au deuxième clic: \stdalert[2]{texte important}
+        \item Alerte standard au troisième clic: \stdalert[3]{texte important}
+        \item Trois alertes pour les nombres:
+              \begin{itemize}
+                  \item Nombre positif: \galert{+5}
+                  \item Nombre négatif: \ralert{-10}
+                  \item Nombre nul: \balert{0.0}
+              \end{itemize}
+        \item Couleur seulement après le premier clic:
+              \begin{itemize}
+                  \item Nombre positif: \galert[2-3]{+5}
+                  \item Nombre négatif: \ralert[2-3]{-10}
+                  \item Nombre nul: \balert[2-3]{0.0}
+              \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\lastslide
+
+\end{document}
