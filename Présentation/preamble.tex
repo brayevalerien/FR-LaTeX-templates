@@ -33,16 +33,18 @@
 % Ce thème utilise comme base le thème Boadilla, chargé par les lignes suivantes
 \usetheme{Boadilla}
 \usecolortheme[]{seagull}
-\setbeamercovered{transparent}
+
+% Rend les éléments cachés invisibles (pour les animations)
+\setbeamercovered{invisible}
 
 % Suppression des symboles de navigation en pieds de page
 \setbeamertemplate{navigation symbols}{}
 
 % Taille des différents éléments
-\setbeamerfont{title}{size=\huge, series=\scshape}
+\setbeamerfont{title}{size=\fontsize{40}{35}, series=\scshape}
 \setbeamerfont{author}{size=\large}
 \setbeamerfont{frametitle}{series=\scshape}
-\setbeamertemplate{frametitle}{\MakeLowercase{\insertframetitle}}
+\setbeamertemplate{frametitle}{\huge\MakeLowercase{\vspace{.25cm}\insertframetitle}}
 \setbeamertemplate{frametitle continuation}{[\insertcontinuationcount]}
 \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
 \setbeamerfont{button}{size=\footnotesize}
@@ -74,6 +76,7 @@
 \setbeamercolor{enumerate item}{fg=textgray}
 \setbeamercolor{enumerate subitem}{fg=textgray}
 \setbeamercolor{footline}{fg=textpurple}
+\setbeamercolor{caption name}{fg=textwhite}
 \setbeamercolor{button}{fg=textgray, bg=button}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -107,41 +110,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                     Commandes utiles                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%
-%  Frames par défaut  %
-%%%%%%%%%%%%%%%%%%%%%%%
-
-% Frame de titre
-% Les information apparaissant sur cette frame sont à définir au début de main.tex
-\newcommand{\titleframe}{
-    \begin{frame}
-        \titlepage
-    \end{frame}
-}
-
-% Frame de titre de partie
-% Arguments:
-% 1. Titre
-% 2. Sous-titre
-\newcommand{\chapterframe}[2]{
-    \begin{frame}
-        \huge\scshape\color{textmagenta}\MakeLowercase{#1}\\
-        \normalsize\color{textwhite}#2
-    \end{frame}
-}
-
-% Dernière slide (avant d'éventuelles annexes)
-% Argument:
-% 1. Phrase de fin (remerciement, call-to-action...)
-\newcommand{\lastframe}[1][Merci pour votre attention.]{
-    {
-        \setbeamercolor{background canvas}{bg=textwhite}
-        \begin{frame}
-            \huge\color{background}#1
-        \end{frame}
-    }
-}
 
 %%%%%%%%%%%%%%
 %  Symboles  %
@@ -178,4 +146,114 @@
 \NewDocumentCommand{\balert}{o g}{%
     \IfNoValueTF{#1}{\textcolor{textblue}{#2}}%
     {\textcolor<#1>{textblue}{#2}}
+}
+
+%%%%%%%%%%%%%
+%  Figures  %
+%%%%%%%%%%%%%
+
+% Paramètres:
+% 1. (Optionnel) Largeur de l'image. Défaut: 3/4 de la largeur du texte.
+% 2. Chemin du fichier de l'image
+% 3. Légende de l'image
+\newcommand{\insertfig}[3][0.65]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{#2}
+    \caption{#3}
+  \end{figure}
+}
+
+% Image temporaire
+\newcommand{\lipsumimage}[1][Lorem Ipsum]{
+  \insertfig{./figures/lipsumimage}{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%  Frames par défaut  %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Frame de titre
+% Les information apparaissant sur cette frame sont à définir au début de main.tex
+\newcommand{\titleframe}{
+    \begin{frame}
+        \titlepage
+    \end{frame}
+}
+
+% Frame de titre de partie
+% Arguments:
+% 1. Titre
+% 2. Sous-titre
+\newcommand{\chapterframe}[2]{
+    \begin{frame}
+        \huge\scshape\color{textmagenta}\MakeLowercase{#1}\\
+        \normalsize\color{textwhite}#2
+    \end{frame}
+}
+
+% Frame avec une liste non ordonnée
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\itemizeframe}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{itemize}
+            #2
+        \end{itemize}
+    \end{frame}
+}
+
+% Frame avec une liste non ordonnée dont les éléments apparaissent progressivement 
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\itemizeframeanimated}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{itemize}[<+->]
+            #2
+        \end{itemize}
+    \end{frame}
+}
+
+% Frame avec une liste ordonnée
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\enumerateframe}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{enumerate}
+            #2
+        \end{enumerate}
+    \end{frame}
+}
+
+% Frame avec une liste ordonnée dont les éléments apparaissent progressivement 
+% Arguments:
+% 1. Titre
+% 2. Liste
+\newcommand{\enumerateframeanimated}[2]{
+    \begin{frame}
+        \frametitle{#1}
+        \begin{enumerate}[<+->]
+            #2
+        \end{enumerate}
+    \end{frame}
+}
+
+
+% Dernière slide (avant d'éventuelles annexes)
+% Argument:
+% 1. Phrase de fin (remerciement, call-to-action...) (optionnelle)
+\newcommand{\lastframe}[1][Merci pour votre attention.]{
+    {
+        \setbeamercolor{background canvas}{bg=textwhite}
+        \begin{frame}
+            \huge\color{background}#1
+        \end{frame}
+    }
+    \appendix % tout ce qui suit n'apparaîtra pas dans la TOC
 }

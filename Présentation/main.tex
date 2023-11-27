@@ -1,5 +1,5 @@
 \documentclass[
-    9pt, aspectratio = 169,
+    11pt, aspectratio = 169,
     xcolor = {dvipsnames},
     hyperref = {pdftex, pdfpagemode=UseNone, hidelinks, pdfdisplaydoctitle=true},
     usepdftitle = false
@@ -7,11 +7,7 @@
 
 \input{preamble.tex}
 
-% Enter title of presentation PDF:
-% \hypersetup{pdftitle={Presentation Title}}
-% Enter link to PDF file with figures:
-% \newcommand{\pdf}{figures.pdf}
-
+% Informations sur la présentation à compléter
 \title{Titre de la présentation} % TODO: à compléter
 \subtitle{Sous-titre de la présentation} % TODO: à compléter (optionnel)
 \author{Nom Prénom} % TODO: à compléter
@@ -21,32 +17,31 @@
 
 \titleframe
 
-% Fill out content of presentation:
-\begin{frame}
-    \frametitle{Listes non ordonnées}
+\itemizeframe{Listes non ordonnées}{
+    \item élément
+    \item élément
     \begin{itemize}
-        \item élément
-        \item élément
-        \begin{itemize}
-            \item sous-élément
-            \item sous-élément
-        \end{itemize}
-        \item élément
+        \item sous-élément
+        \item sous-élément
     \end{itemize}
-\end{frame}
+    \item élément
+}
 
-\begin{frame}
-    \frametitle{Listes ordonnées}
+\itemizeframeanimated{Listes non ordonnées animées}{
+    \item élément
+    \item élément
+    \item élément
+}
+
+\enumerateframe{Listes ordonnées}{
+    \item élément
+    \item élément
     \begin{enumerate}
-        \item élément
-        \item élément
-        \begin{enumerate}
-            \item sous-élément
-            \item sous-élément
-        \end{enumerate}
-        \item élément
+        \item sous-élément
+        \item sous-élément
     \end{enumerate}
-\end{frame}
+    \item élément
+}
 
 \chapterframe{Titre de la partie}{Sous-titre de la partie}
 
@@ -75,5 +70,11 @@
     Phrase de fin\\
     \small(optionnelle)
 ]
+
+\begin{frame}
+    \frametitle{Annexe}
+    Ceci est une annexe avec une image.    
+    \lipsumimage[Figure de l'annexe]
+\end{frame}
 
 \end{document}
