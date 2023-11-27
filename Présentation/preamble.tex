@@ -244,6 +244,17 @@
     \end{frame}
 }
 
+% Paramètres:
+% 1. (Optionnel) Largeur de l'image. Défaut: 3/4 de la largeur du texte.
+% 2. Titre de la frame
+% 3. Chemin du fichier de l'image
+% 4. Légende de l'image
+\newcommand{\figframe}[4][.65]{
+    \begin{frame}
+        \frametitle{#2}
+        \insertfig[#1]{#3}{#4}
+    \end{frame}
+}
 
 % Dernière slide (avant d'éventuelles annexes)
 % Argument:
