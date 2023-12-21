@@ -49,6 +49,11 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
 \setbeamerfont{button}{size=\footnotesize}
 
+% Bibliographie
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
 %%%%%%%%%%%%%%
 %  Couleurs  %
 %%%%%%%%%%%%%%
@@ -58,6 +63,7 @@
 % https://gist.github.com/brayevalerien/cb94ac685ebc186f359deae113b6710c
 
 \definecolor{background}{HTML}{272822}
+\definecolor{backgroundlight}{HTML}{414339}
 \definecolor{button}{HTML}{414339}
 \definecolor{textwhite}{HTML}{f8f8f2}
 \definecolor{textgray}{HTML}{75715e}
@@ -67,20 +73,23 @@
 \definecolor{textmagenta}{HTML}{ae81ff}
 \definecolor{textpurple}{HTML}{8c6bc8}
 
-% Pour utiliser un thème clair, commenter les les couleurs définies ci-dessus et dé-commenter celles définies ci-dessous.
+% Pour utiliser un thème clair, utiliser la commande \uselighttheme.
 % Les couleurs utilisées dans ce thème sont celles du thème Monokai Light.
 % Thème par @zoxon sur github:
 % https://github.com/zoxon/vscode-theme-monokai-light/
 
-% \definecolor{background}{HTML}{fafafa}
-% \definecolor{button}{HTML}{414339}
-% \definecolor{textwhite}{HTML}{49483e}
-% \definecolor{textgray}{HTML}{75715E}
-% \definecolor{textred}{HTML}{f9005a}
-% \definecolor{textgreen}{HTML}{679c00}
-% \definecolor{textblue}{HTML}{0089b3}
-% \definecolor{textmagenta}{HTML}{8c6bc8}
-% \definecolor{textpurple}{HTML}{ae81ff}
+\newcommand{\uselighttheme}{
+    \definecolor{background}{HTML}{fafafa}
+    \definecolor{backgroundlight}{HTML}{414339} % TODO: change this to match light theme
+    \definecolor{button}{HTML}{414339}
+    \definecolor{textwhite}{HTML}{49483e}
+    \definecolor{textgray}{HTML}{75715E}
+    \definecolor{textred}{HTML}{f9005a}
+    \definecolor{textgreen}{HTML}{679c00}
+    \definecolor{textblue}{HTML}{0089b3}
+    \definecolor{textmagenta}{HTML}{8c6bc8}
+    \definecolor{textpurple}{HTML}{ae81ff}
+}
 
 
 \setbeamercolor{background canvas}{bg=background}
@@ -94,6 +103,13 @@
 \setbeamercolor{footline}{fg=textpurple}
 \setbeamercolor{caption name}{fg=textwhite}
 \setbeamercolor{button}{fg=textgray, bg=button}
+\setbeamercolor{block body}{fg=textwhite, bg=backgroundlight}
+\setbeamercolor{block title}{fg=background, bg=textwhite}
+\setbeamercolor{bibliography item}{fg=textwhite}
+\setbeamercolor{bibliography entry title}{fg=textwhite}
+\setbeamercolor{bibliography entry location}{fg=textwhite}
+\setbeamercolor{bibliography entry note}{fg=textwhite}
+\setbeamercolor{bibliograph y entry author}{fg=textwhite}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %  Numéro de slides  %

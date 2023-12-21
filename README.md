@@ -15,6 +15,8 @@ Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui m
     1. [Graphique de lois normales](#graphique-représentant-des-lois-normales)
     1. [p-valeur](#p-valeur)
     1. [Réseau de neurones](#réseau-de-neurones)
+    1. [PixelCNN++](#pixelcnn)
+1. [Présentation](#présentation)
 
 ## Notes de cours
 
@@ -81,6 +83,22 @@ Ce graphique utilise également le package pgfplots.
 ### Réseau de neurones
 Un perceptron multicouches (réseau de neurones feedforward) à 3 couches, dessinable avec la commande `\fnn`, qui prend en arguments la taille des couches. Pour changer le nombre de couche, il faut changer la définition de cette commande, ce qui relativement aisé pour un nombre de couches connu à l'avance.
 ![Capture d'écran du modèle "réseau de neurones"](./images/fnn.png)
+
+### PixelCNN++
+Une architecture de U-Net, avec utilisation du positionnement des nœuds et une accolade.
+![Capture d'écran du modèle "réseau de neurones"](./images/pixelcnn.png)
+
+
+# Présentation
+![Capture d'écran du modèle "présentation"](./images/presentation.png)
+Ce modèle utilise `beamer` et redéfini un nouveau thème minimaliste, aux couleurs du thème Monokai Classic. Ce modèle comprend:
+- des commandes pour les slides les plus utiles (chapitres, listes, figures...)
+- une slide de fin
+- trois types d'alertes
+- une slide de titre
+- un thème sombre et un thème clair, facilement interchangeables
+
+Puisqu'il compile rapidement, ce modèle est parfait pour itérer simplement et produire des présentations minimalistes mais efficaces.
 
 ---
 **Note:** les captures d'écrans ci-dessus ne montrent pas les vraies couleurs des pdf générés (le viewer pdf applique un filtre).
