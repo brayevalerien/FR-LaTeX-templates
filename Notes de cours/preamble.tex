@@ -321,37 +321,6 @@
   \maketitle
   % Rend le titre du pagestyle vide, sans fancy headers / footers.
   \thispagestyle{empty}
-  % Saute une page
-  \newpage
-
-  % Si le fichier "intro.tex" existe, l'ajoute.
-  \IfFileExists{intro.tex}{ % si le fichier existe.
-    % Ajoute le fichier.
-    \input{intro}
-
-    % Rend le pagestyle fancy pour la page intro.tex.
-    \pagestyle{fancy}
-
-    % Retire la ligne de l'entête
-    \renewcommand\headrulewidth{0pt}
-
-    % Retire tout ce qui est lié à l'entête.
-    \fancyhead{}
-
-    % Ajoute ce qui est lié à l'entête au centre.
-    \fancyfoot[C]{
-      \vspace{-2cm} % remonte le pied de page (sinon marge trop petite)
-      \hrule
-      \vspace{0.1cm}
-      \@author \\
-      \term \space \academicyear \\
-      Dernière mise à jour: \@date \\
-      \faculty
-    }
-  }
-
-  % Saute une page.
-  \newpage
 
   % Comme précédemment, enlève ce qui est lié à l'entête et le remplace par
   % le numéro de page, toujours en chiffres romains.
