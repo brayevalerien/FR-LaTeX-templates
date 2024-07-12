@@ -6,17 +6,7 @@
 ---
 
 # FR-LaTeX-templates
-Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui me sont souvent utiles:
-1. [Notes de cours](#notes-de-cours)
-1. [Compte rendu de réunion](#compte-rendu-de-réunion)
-1. [Lettre formelle](#lettre-formelle)
-1. [Schémas Tikz](#tikz)
-    1. [Ligne temporelle](#ligne-temporelle)
-    1. [Graphique de lois normales](#graphique-représentant-des-lois-normales)
-    1. [p-valeur](#p-valeur)
-    1. [Réseau de neurones](#réseau-de-neurones)
-    1. [PixelCNN++](#pixelcnn)
-1. [Présentation](#présentation)
+Ce répertoire rassemble des modèles de documents, figures et codes LaTeX qui me sont souvent utiles.
 
 ## Notes de cours
 
@@ -35,7 +25,6 @@ Ce modèle reste lourd et le long préambule rend le temps de compilation non n�
 
 Ce modèle est adapté du modèle [Charlie's Math Template](https://github.com/SeniorMars/dotfiles/tree/5b39b3ef545fa41361dfe64a2cbc03d8411a808f/latex_template) par [@SeniorMars](https://github.com/SeniorMars/).
 
-
 ## Compte rendu de réunion
 
 ![Capture d'écran du modèle "compte rendu de réunion"](./images/compte_rendu_de_reunion.png)
@@ -45,14 +34,13 @@ Ce modèle est un dérivé du modèle de prise de notes de cours, ne conservant 
 - des environnements personnalisés pour les participants, l'ordre du jour, les notes de réunion...
 
 Ce modèle est utile pour prendre les notes d'une réunion et est destiné à être réutilisé d'une réunion à l'autre.
-Quatre environnements sont en à remplir:
+Quatre environnements sont- à remplir:
 - participants
 - ordre du jour
 - notes
 - tâches à faires
 
 Ce modèle est relativement léger et permet de compiler le document pendant la prise de notes sans perdre de temps (environ 3 secondes).
-
 
 ## Lettre formelle
 
@@ -64,7 +52,6 @@ Modèle destiné à l'écriture de lettres formelles (lettres aux administration
 - `\signe` permettant d'ajouter une signature
 
 Le modèle est minimaliste mais permet de rédiger une lettre rapidement sans besoin de manipuler un nombre trop importants de commandes.
-
 
 ## Schémas Tikz
 Le répertoire [Tikz](./Tikz/) contient des schémas créés en utilisant le package Tikz. Le code de chacun des schémas est aisément modifiable pour pouvoir les adapter aux besoins du moment.
@@ -85,9 +72,17 @@ Un perceptron multicouches (réseau de neurones feedforward) à 3 couches, dessi
 ![Capture d'écran du modèle "réseau de neurones"](./images/fnn.png)
 
 ### PixelCNN++
-Une architecture de U-Net, avec utilisation du positionnement des nœuds et une accolade.
+Une architecture de U-Net, avec utilisation du positionnement des nœuds et une accolade. Cette représentation a la particularité de se concentrer sur les tenseurs eux-mêmes plutôt que sur les modules, qui sont quand eux représentés par les transitions entre tenseurs.
+Cette approche peu conventionnelle pour la représentation de modèles de deep-learning pourrait peut-être permettre de mieux représenter la forme des tenseurs?
 ![Capture d'écran du modèle "réseau de neurones"](./images/pixelcnn.png)
 
+### U-Net
+Architecture proche du backbone utilisé dans l'article original des modèles de diffusion de Ho et al., un U-Net résiduel de profondeur 4 avec auto-attention.
+![Capture d'écran du modèle "U-Net"](./images/unet.png)
+
+### Chaîne de Markov d'un DDPM
+Représentation classique sous la forme d'une chaîne de Markov d'un modèle de diffusion traditionnel (DDPM), avec images externes et dégradé sur des flèches courbées.
+![Capture d'écran du modèle "Chaîne de Markov DDPM"](./images/chaine_markov_ddpm.png)
 
 # Présentation
 ![Capture d'écran du modèle "présentation"](./images/presentation.png)
